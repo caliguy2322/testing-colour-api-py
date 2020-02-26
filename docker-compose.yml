@@ -11,7 +11,7 @@ services:
       - colour_net
   colour_api:
     container_name: colour_api
-    image: colour_api
+    image: colourapi_colour_api
     ports:
       - "8080:80"
     depends_on:

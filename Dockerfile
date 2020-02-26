@@ -1,11 +1,8 @@
 ARG PYTHON_VERSION=3.7
-
 FROM python:${PYTHON_VERSION}
-
-WORKDIR /src
-
-COPY requirements.txt /src/requirements.txt
+WORKDIR /usr/src
+COPY requirements.txt ./requirements.txt
 RUN pip install -r requirements.txt
-
-COPY . /src
-CMD pytest
+COPY . ./
+RUN chmod +x ./start.sh
+CMD ["/bin/sh", "start.sh"]
