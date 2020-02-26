@@ -1,10 +1,17 @@
 version: "3"
 services:
-  colour-api:
-    container_name: colour_api
+  testing-colour-api:
+    container_name: testing_py
     build:
       context: .
       dockerfile: Dockerfile
+    depends_on:
+      - colour_api
+    networks:
+      - colour_net
+  colour_api:
+    container_name: colour_api
+    image: colour_api
     ports:
       - "8080:80"
     depends_on:
@@ -21,17 +28,6 @@ services:
       SA_PASSWORD: "Pa55w0rd2019"
     ports:
       - "1433:1433"
-    networks:
-      - colour_net
-  testing-colour-api:
-    container_name: testing_py
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8081:80"
-    depends_on:
-      - colour-api
     networks:
       - colour_net
 networks:
